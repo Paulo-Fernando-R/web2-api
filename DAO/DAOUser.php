@@ -7,7 +7,7 @@ class DAOUser
         $lista = [];
 
         $pst = Conexao::getPreparedStatement(
-            "select s.id as sid, u.id as uid, u.name
+            "select  u.id, u.name
             from user as u 
             inner join userschema as us
             on us.iduser = u.id
@@ -31,14 +31,14 @@ class DAOUser
         return $lista;*/
     }
 
-    /*public function inclui(User $user)
+    public function inclui(User $user)
     {
-        $sql = 'insert into cliente (idUsuario, nome, telefone) values(?, ?, ?);';
+        $sql = 'insert into user (name, username, password) values(?, ?, ?);';
 
         $pst = Conexao::getPreparedStatement($sql);
-        $pst->bindValue(1,$cliente->getIdUsuario());
-        $pst->bindValue(2,$cliente->getNome());
-        $pst->bindValue(3,$cliente->getTelefone());
+        $pst->bindValue(1,$user->getName());
+        $pst->bindValue(2,$user->getUsername());
+        $pst->bindValue(3,$user->getPassword());
         
         if($pst->execute())
         {
@@ -46,5 +46,5 @@ class DAOUser
         }
         return false;
         
-    }*/
+    }
 }
