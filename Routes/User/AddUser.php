@@ -6,14 +6,14 @@ require_once _BASE . '/DAO/Conexao.php';
 require_once _BASE . '/Modelo/User.php';
 require_once _BASE . '/DAO/DAOUser.php';
 
-$post = file_get_contents('php://input');
-$name = filter_input(INPUT_POST, 'name');
-$username = filter_input(INPUT_POST, 'username');
-$password = filter_input(INPUT_POST, 'password');
+$post = json_decode(file_get_contents('php://input'));
+$name = $post -> name;
+$username = $post -> username;
+$password = $post -> password;
 
 if($name == '' || $username == '' || $password == '')
 {
-    echo json_encode(['status' => $post ]);//errorInput
+    echo json_encode(['status' => 'errorInput' ]);
     return;
 }
 
