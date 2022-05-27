@@ -47,4 +47,24 @@ class DAOUser
         return false;
         
     }
+
+    public function login (User $user)
+    {
+        $sql = 'select id, name from user where username = ? and password = ?';
+
+        $pst = Conexao::getPreparedStatement($sql);
+        $pst->bindValue(1,$user->getUsername());
+        $pst->bindValue(2,$user->getPassword());
+        $pst->execute();
+        $jsonArray = array();
+        $count = 0;
+        while ($row = $pst->fetchAll(PDO::FETCH_ASSOC))
+        {
+            $jsonArray = $row;
+            $count +=1;
+        }
+
+        return $jsonArray;
+
+    }
 }
