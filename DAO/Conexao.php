@@ -3,7 +3,7 @@ class Conexao
 {
     private static $dmn = 'mysql:host=localhost;dbname=web2db;port3306';
     private static $usuario = 'root';
-    private static $senha = '';
+    private static $senha = 'root';
     private static $conexao = null;
 
     public static function getConexao ()
