@@ -39,12 +39,16 @@ class DAOUser
         $pst->bindValue(1,$user->getName());
         $pst->bindValue(2,$user->getUsername());
         $pst->bindValue(3,$user->getPassword());
-        
-        if($pst->execute())
-        {
-            return true;
+        try{
+            if($pst->execute())
+            {
+                return 0;
+            }
+            return 1;
         }
-        return false;
+        catch(PDOException){
+            return 2;
+        }
         
     }
 

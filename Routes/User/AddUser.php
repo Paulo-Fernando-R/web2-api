@@ -24,11 +24,15 @@ $user->setName($name);
 $user->setUsername($username);
 $user->setPassword($password);
 
-if(!$dao->inclui($user))
+$res = $dao->inclui($user);
+if($res == 1)
 {
     echo json_encode(['status' => 'errorAdd']);
-    return;
+    //return;
 }
-echo json_encode(['status' => 'ok']);
+else if($res == 0)
+    echo json_encode(['status' => 'ok']);
+else
+    echo json_encode(['status' => 'preexistent']);
 
 
