@@ -24,6 +24,26 @@ class DAOSchema
         return $lista;*/
     }
 
+    public function addUserInSchema($idUser, $idSchema)
+    {
+        $sql = 'insert into userschema(iduser, idschema) values(?, ?);';
+
+        $pst = Conexao::getPreparedStatement($sql);
+        $pst->bindValue(1,$idUser);
+        $pst->bindValue(2,$idSchema);
+        try{
+            if($pst->execute())
+            {
+                return 0;
+            }
+            return 1;
+        }
+        catch(PDOException){
+            return 2;
+        }
+        
+    }
+
     /*public function inclui(User $user)
     {
         $sql = 'insert into cliente (idUsuario, nome, telefone) values(?, ?, ?);';
