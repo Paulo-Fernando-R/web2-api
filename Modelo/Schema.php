@@ -1,6 +1,6 @@
 <?php
 
-class Plan{
+class Schema{
     private $id;
     private $name;
     private $description;

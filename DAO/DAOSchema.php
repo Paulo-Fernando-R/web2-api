@@ -44,6 +44,28 @@ class DAOSchema
         
     }
 
+    public function addSchema(Schema $schema)
+    {
+        $sql = 'insert into schems(name, description, minvalue, iduser) values(?, ?, ?, ?);';
+
+        $pst = Conexao::getPreparedStatement($sql);
+        $pst->bindValue(1,$schema->getName());
+        $pst->bindValue(2,$schema->getDescription());
+        $pst->bindValue(3,$schema->getMinvalue());
+        $pst->bindValue(4,$schema->getIduser());
+        try{
+            if($pst->execute())
+            {
+                return 0;
+            }
+            return 1;
+        }
+        catch(Exception $e){
+            return 2;
+        }
+        
+    }
+
     /*public function inclui(User $user)
     {
         $sql = 'insert into cliente (idUsuario, nome, telefone) values(?, ?, ?);';
