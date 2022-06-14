@@ -44,6 +44,26 @@ class DAOSchema
         
     }
 
+    public function removeUserFromSchema($idUser, $idSchema)
+    {
+        $sql = 'delete from userschema where iduser = ? and idschema = ?;';
+
+        $pst = Conexao::getPreparedStatement($sql);
+        $pst->bindValue(1,$idUser);
+        $pst->bindValue(2,$idSchema);
+        try{
+            if($pst->execute())
+            {
+                return 0;
+            }
+            return 1;
+        }
+        catch(PDOException){
+            return 2;
+        }
+        
+    }
+
     public function addSchema(Schema $schema)
     {
         $sql = 'insert into schems(name, description, minvalue, iduser) values(?, ?, ?, ?);';
